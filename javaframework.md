@@ -210,15 +210,140 @@ Collections.reverse(nums);
 ---
 
 # Summary
+# 📋 Java Collections Framework - Quick Reference
 
-| Collection | Allows Duplicates | Maintains Order | Sorted |
-|------------|-------------------|-----------------|--------|
-| ArrayList | ✅ Yes | ✅ Yes | ❌ No |
-| LinkedList | ✅ Yes | ✅ Yes | ❌ No |
-| Vector | ✅ Yes | ✅ Yes | ❌ No |
-| HashSet | ❌ No | ❌ No | ❌ No |
-| LinkedHashSet | ❌ No | ✅ Yes | ❌ No |
-| TreeSet | ❌ No | ✅ Yes | ✅ Yes |
-| HashMap | Keys ❌ Values ✅ | ❌ No | ❌ No |
-| LinkedHashMap | Keys ❌ Values ✅ | ✅ Yes | ❌ No |
-| TreeMap | Keys ❌ Values ✅ | ✅ Yes | ✅ Yes |
+| Interface / Family | Common Implementations | Order | Duplicates | Null Support | Typical Use Cases | Performance Notes | Key APIs |
+|--------------------|------------------------|-------|------------|--------------|-------------------|-------------------|----------|
+| **List** | ArrayList, LinkedList, Vector | Maintains insertion order; index-based access | ✅ Allowed | ✅ Yes (elements) | Indexed access, ordered data, stacks (Stack), queues (LinkedList) | **ArrayList:** O(1) get/add-end, O(n) insert/delete middle <br> **LinkedList:** O(1) add/remove ends, O(n) random access | `get()`, `set()`, `add()`, `remove()`, `indexOf()`, `subList()` |
+| **Set** | HashSet, LinkedHashSet, TreeSet | **HashSet:** No order <br> **LinkedHashSet:** Insertion order <br> **TreeSet:** Sorted | ❌ Not Allowed | **HashSet/LinkedHashSet:** One `null` <br> **TreeSet:** No `null` | Unique elements, membership testing, de-duplication | **HashSet:** O(1) avg add/search <br> **TreeSet:** O(log n) add/search | `add()`, `contains()`, `remove()`, `iterator()` |
+| **Queue / Deque** | ArrayDeque, LinkedList, PriorityQueue | **Queue:** FIFO <br> **Deque:** Both ends <br> **PriorityQueue:** Priority order | ✅ Allowed | **PriorityQueue:** No `null` | Task scheduling, BFS, buffering | **ArrayDeque:** O(1) add/remove ends <br> **PriorityQueue:** O(log n) add/remove | `offer()`, `poll()`, `peek()`, `addFirst()`, `pollLast()` |
+| **Map** | HashMap, LinkedHashMap, TreeMap | **HashMap:** No order <br> **LinkedHashMap:** Insertion order <br> **TreeMap:** Sorted by keys | Keys unique, Values can duplicate | **HashMap:** One `null` key, many `null` values <br> **TreeMap:** No `null` key | Fast lookup, indexing, frequency counting | **HashMap:** O(1) avg get/put <br> **TreeMap:** O(log n) get/put | `put()`, `get()`, `containsKey()`, `remove()`, `keySet()`, `values()`, `entrySet()` |
+| **Concurrent Collections** | ConcurrentHashMap, CopyOnWriteArrayList, ConcurrentLinkedQueue | Depends on implementation | Depends on implementation | Usually disallows `null` | Multi-threaded applications | Better throughput than synchronized collections | Concurrent APIs |
+| **Utility Classes** | Collections, Arrays | — | — | — | Sorting, reversing, shuffling, searching | Utility/helper methods | `sort()`, `reverse()`, `shuffle()`, `binarySearch()`, `fill()`, `copy()` |
+
+---
+
+# 🚀 Common Time Complexities
+
+| Collection | Search | Insert | Delete |
+|------------|--------|--------|--------|
+| ArrayList | O(1) (index) / O(n) (value) | O(1) end, O(n) middle | O(n) |
+| LinkedList | O(n) | O(1) (known position) | O(1) (known position) |
+| HashSet | O(1) avg | O(1) avg | O(1) avg |
+| TreeSet | O(log n) | O(log n) | O(log n) |
+| HashMap | O(1) avg | O(1) avg | O(1) avg |
+| TreeMap | O(log n) | O(log n) | O(log n) |
+| PriorityQueue | O(n) search | O(log n) | O(log n) |
+
+---
+
+# 💡 Quick Selection Guide
+
+| Requirement | Best Choice |
+|-------------|-------------|
+| Fast random access | ArrayList |
+| Frequent insert/delete | LinkedList |
+| Unique elements | HashSet |
+| Unique + insertion order | LinkedHashSet |
+| Sorted unique elements | TreeSet |
+| FIFO operations | Queue / ArrayDeque |
+| Priority-based processing | PriorityQueue |
+| Fast key-value lookup | HashMap |
+| Ordered key-value pairs | LinkedHashMap |
+| Sorted keys | TreeMap |
+| Thread-safe collections | ConcurrentHashMap / CopyOnWriteArrayList |
+
+---
+
+> **Interview Tip:**  
+> - Use **ArrayList** by default unless frequent insertions/deletions are required.  
+> - Use **HashMap** for fast lookups.  
+> - Use **HashSet** when uniqueness matters.  
+> - Use **TreeMap/TreeSet** when sorted data is required.  
+> - Use **ArrayDeque** instead of **Stack** for stack operations in modern Java.
+
+
+# Important Utility Classes
+
+The Java Collections Framework provides two important utility classes that simplify working with collections and arrays.
+
+---
+
+## Collections Class
+
+The **Collections** class is a utility class present in the `java.util` package. It contains static methods for performing common operations on collection objects.
+
+### Common Methods
+
+| Method | Description |
+|---------|-------------|
+| `sort()` | Sorts a list in ascending order |
+| `reverse()` | Reverses the order of elements |
+| `shuffle()` | Randomly shuffles elements |
+| `binarySearch()` | Performs binary search on a sorted list |
+| `min()` | Returns the minimum element |
+| `max()` | Returns the maximum element |
+| `frequency()` | Counts the occurrences of an element |
+| `fill()` | Replaces all elements with a specified value |
+| `copy()` | Copies elements from one list to another |
+| `swap()` | Swaps two elements in a list |
+| `rotate()` | Rotates elements in a list |
+| `unmodifiableList()` | Creates a read-only list |
+| `synchronizedList()` | Creates a thread-safe list |
+
+### Example
+
+```java
+List<Integer> nums = Arrays.asList(5, 2, 8, 1);
+
+Collections.sort(nums);
+Collections.reverse(nums);
+Collections.shuffle(nums);
+
+System.out.println(nums);
+```
+
+---
+
+## Arrays Class
+
+The **Arrays** class is also part of the `java.util` package. It provides utility methods specifically for working with arrays.
+
+### Common Methods
+
+| Method | Description |
+|---------|-------------|
+| `sort()` | Sorts an array |
+| `binarySearch()` | Searches an element in a sorted array |
+| `fill()` | Fills an array with a specific value |
+| `copyOf()` | Creates a copy of an array |
+| `copyOfRange()` | Copies a specific range from an array |
+| `equals()` | Checks whether two arrays are equal |
+| `deepEquals()` | Compares multidimensional arrays |
+| `toString()` | Converts an array to a string |
+| `deepToString()` | Converts multidimensional arrays to a string |
+| `asList()` | Converts an array into a List |
+
+### Example
+
+```java
+int[] arr = {5, 3, 8, 1};
+
+Arrays.sort(arr);
+
+System.out.println(Arrays.toString(arr));
+```
+
+---
+
+## Collections vs Arrays Utility Class
+
+| Collections | Arrays |
+|-------------|--------|
+| Works with Collection objects (`List`, `Set`, `Queue`) | Works only with arrays |
+| Contains methods like `sort()`, `shuffle()`, `reverse()` | Contains methods like `sort()`, `binarySearch()`, `copyOf()` |
+| Part of `java.util.Collections` | Part of `java.util.Arrays` |
+
+> **Interview Tip:**  
+> - Use the **Collections** class when working with Java Collection objects (`ArrayList`, `LinkedList`, etc.).  
+> - Use the **Arrays** class when working with Java arrays.
