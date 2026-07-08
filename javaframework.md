@@ -4,7 +4,7 @@ When you start programming in Java, the first tool you probably use to store mul
 
 This is exactly why Java Collections Framework (JCF) exists. The JCF is part of the java.util package and provides a set of ready-to-use classes and interfaces for storing and manipulating groups of objects. Collections are dynamic — meaning they can grow or shrink in size and they come with built-in methods for common operations. They also follow a consistent design, which means once you learn how to use one collection, you can quickly adapt to others.
 
-![Java Collection Framework](Java-Collection-Framework.png)
+![JAVA_FRAMEWORK](Java-Collection-Framework.png)
 
 The Concept of a Framework
 The Java Collections Framework isn’t just a random set of classes it’s an organized hierarchy. At the top sits the Iterable interface, which allows objects to be looped through using the enhanced for-each loop. Then comes the Collection interface, which represents a group of elements and defines basic operations like adding, removing, checking size, and clearing elements.
